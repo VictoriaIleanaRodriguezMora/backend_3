@@ -2,13 +2,15 @@
   "name": "backend_3",
   "version": "1.0.0",
   "description": "Programación Backend 3",
-  "main": "server.js",
+  "main": "src/tdd.js",
   "scripts": {
-    "dev": "node --watch src/app.js"
+    "dev": "nodemon src/app.js",
+    "devv": "node --watch src/app.js"
   },
   "author": "Victoria Rodriguez",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
   }
 }

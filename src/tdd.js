@@ -11,7 +11,21 @@
 
 // PASO 2: Hacer que las pruebas pasen
 const sumar = (a, b) => {
-    return a + b;
+
+    // Test 2
+    if (a === undefined || b === undefined) {
+        return 0
+    }
+
+    // Test 1
+    if (typeof (a) !== "number" || typeof (b) !== "number") {
+        return null
+    }
+
+    // Test 3
+    const rtado = a + b
+    return rtado;
+
 };
 
 
@@ -50,6 +64,7 @@ if (resultado3 === 3) {
     console.log("✅ Test 3 pasó");
     testPasados++;
 } else {
+    console.log(sumar(1, 2));
     console.log(`❌ Test 3 no pasó. Se esperaba ${1 + 2} pero se recibió: ${resultado3}`);
 }
 
@@ -67,6 +82,6 @@ if (resultado4 === 4) {
 
 if (testPasados === testTotales) {
     console.log("Felicitaciones, pasaste todos los tests!");
-} else{
-    console.log(`Se pasaron ${testPasados}/${testTotales} tests `);
+} else {
+    console.log(`⚠ Se pasaron ${testPasados}/${testTotales} tests `);
 }
