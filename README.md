@@ -22,6 +22,9 @@ Es una metodología de desarrollo de software que consiste en pensar y escribir 
 
 Ejemplo: Función Suma
 
+Para el test 4:
+¿Cómo pasar un valor no primitivo (Array, Object) por parametro en JS?
+[Parámetros rest](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Functions#par%C3%A1metros_de_funci%C3%B3n)
 
 
 
@@ -33,4 +36,4 @@ Ejemplo: Función Suma
 
 ### Desarrollo preventivo a partir de mocks
 
-00:43:00
+00:53:00

@@ -10,23 +10,30 @@
 // 4. La función debe poder hacer la suma con cualquier cantidad de números.
 
 // PASO 2: Hacer que las pruebas pasen
-const sumar = (a, b) => {
-
+/* const sumar = (a, b) => {
     // Test 2
     if (a === undefined || b === undefined) {
         return 0
     }
-
     // Test 1
     if (typeof (a) !== "number" || typeof (b) !== "number") {
         return null
     }
-
     // Test 3
     const rtado = a + b
     return rtado;
+}; */
 
-};
+const sumar = (...nros) => {
+
+    // Test 2
+    if (nros.length === 0) {
+        return 0
+    }
+
+    
+
+}
 
 
 // TEST 1
