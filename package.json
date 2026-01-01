@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "Programación Backend 3",
   "main": "server.js",
+  "type": "module",
   "scripts": {
+    "dev": "node --watch src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Victoria Rodriguez",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
