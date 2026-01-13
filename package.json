@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "Programación Backend 3",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node main.js",
+    "start:prod": "node dotenv.js prod",
+    "start:dev": "node dotenv.js dev"
   },
   "author": "Victoria Rodriguez",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^14.0.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  }
 }
