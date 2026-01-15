@@ -143,3 +143,29 @@ https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/throw
 https://fabiokounang.medium.com/differences-between-throw-and-throw-new-error-in-javascript-nodejs-569545e980a1
 
 se desea conocer el error y gestionarlo . Es entonces cuando se genera un error.
+
+# child process
+node se ejecuta en un sólo proceso, en un sólo hilo 
+gracias al asincronismo, puede ir ejecutando tareas o acciones, que parecen ser en paralelo, pero són en un sólo hilo 
+
+cuando node se encuentra con una operación asincronica, la manda a ejecutar y sin esperar que termine, continua con la ejecución de traeas siguientes, por medio de 'la cola de eventos', va a recibir más adelante, eventos de que la funcion asincronica finalizó y va a retomar lo que tenia que hacer en esa operación asincronica 
+
+utilizar más de un proceso, de un hilo en una app de node, es una de las mejores maneras de escalar la app, 
+
+en caso de que lleguen mil solicitudes por segundo, un sólo proceso no se lo va a bancar, entonces ahi hay que empezar a preparar la aplicacion para el crecimiento,
+
+el manejo de los procesos hijos es una técnica para aprovechar y hacer que la app escale
+
+multiplicamos el proceso principal 
+tener un jefe/patrón de la obra, que trae obreros a trabajar, y queda a cargo
+
+### como hacer que el proceso principal haga trabajar a sus procesos hijos 
+
+proceso hijo, es un proceso creado por el proceso padre y node nos va a permitir crear esos procesos con varias funciones/metodos ![alt text](image.png)
+
+
+
+
+
+
+
