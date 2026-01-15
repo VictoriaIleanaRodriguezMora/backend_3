@@ -56,7 +56,7 @@ app.listen(PORT, () => {
 import config from "./05_config.js"
 const app = express();
 const PORT = config.PORT;
-const NODE_ENV = config.env.NODE_ENV;
+const NODE_ENV = config.NODE_ENV;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

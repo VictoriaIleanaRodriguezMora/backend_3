@@ -114,4 +114,4 @@ en .gitignore > .env
 
 por convencion en mayuscula y snake case
 
-min 52
+# Hasta diapositiva 33
