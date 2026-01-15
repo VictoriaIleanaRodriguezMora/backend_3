@@ -143,8 +143,8 @@ https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/throw
 https://fabiokounang.medium.com/differences-between-throw-and-throw-new-error-in-javascript-nodejs-569545e980a1
 
 se desea conocer el error y gestionarlo . Es entonces cuando se genera un error.
-
-# child process
+.00
+# child process 01:26
 node se ejecuta en un sólo proceso, en un sólo hilo 
 gracias al asincronismo, puede ir ejecutando tareas o acciones, que parecen ser en paralelo, pero són en un sólo hilo 
 
@@ -164,8 +164,16 @@ tener un jefe/patrón de la obra, que trae obreros a trabajar, y queda a cargo
 proceso hijo, es un proceso creado por el proceso padre y node nos va a permitir crear esos procesos con varias funciones/metodos ![alt text](image.png)
 
 
+### exec 01:30:00
+https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec
+
+child process es una libreria nativa de node, no se instala
+
+la funcion exec lo que haces es abrir la terminal, ejecutar un comando y cerrar la terminal, y manda la respuesta a una funcion callback que está esperando la rta 
+
+como 1° parametro recibe el comando a ejecutar, y como 2° parametro una callback, que recibe 3 argumentos
+el 1° de esos argumentos, es 'err', si no se puede ejecutar 
 
 
-
-
+### execFile 01:36:00
 
