@@ -115,3 +115,31 @@ en .gitignore > .env
 por convencion en mayuscula y snake case
 
 # Hasta diapositiva 33
+
+# Global & child process - 37
+## Listeners - Método ON
+permite poner al proceso principal (process) a la escucha de algun evento, para poder ejecutar alguna acción, en caso de que suceda algo
+
+### hay 3 tipos de listeners
+3 tipos de metodos que van a estar escuchando procesos 
+
+beforeExit, exitEvent, uncaughtEsception
+
+
+### beforeExit
+se ejecuta, cuando node no tiene más tareas para ejecutar
+
+no se llama a este evento, si se mata el proceso con process.exit
+
+por más que este líneas despues de la definicion de evento, no se ejecuta el beforeExit
+
+### exit - cuando muere el proceso
+con el process.exit(numero) le puedo pasar un numero y ese número le llega a la funcion por parametro 
+
+### uncaughtException - errores no manejados
+
+https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Statements/throw
+
+https://fabiokounang.medium.com/differences-between-throw-and-throw-new-error-in-javascript-nodejs-569545e980a1
+
+se desea conocer el error y gestionarlo . Es entonces cuando se genera un error.
