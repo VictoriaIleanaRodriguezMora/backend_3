@@ -184,3 +184,33 @@ el 1° de esos argumentos, es 'err', si no se puede ejecutar
 
 - https://nodejs.org/api/child_process.html#child_processexecfilefile-args-options-callback
 - https://nodejs.org/api/child_process.html
+
+### spawn
+la diferenncia con exec, es que la rta me la va a dar en cuotas 
+
+puedo procesar + info, pero lo tengo que atajar como si fueran eventos 
+
+
+```bash
+find / # lista todos los archivos en la pc
+find . # lista los archivos en el directorio
+```
+
+crea un proceso hijo, y que este haga el trabajo sucio
+lo que permite es que el proceso principal no esté bloqueado y pueda estar haciendo otras cosas
+lo que permite es usar al máximo la capacidad del hilo
+
+
+### Recapitulación
+- exec --> Crea un proceso aparte, para que ejecute un comando que yo le paso. el proceso hace lo suyo, y cuando termina me manda la data 
+- execFile --> hace lo mismo, pero permite leer el comando desde un archivo externo 
+! ambos daban error, al querer ejecutar una tarea grande, superaba el peso permitido
+- spawn --> para evitar eso, devuelve la info en cuotas
+
+### fork 
+es como el spawn, en el sentido de que si quiero crear un proceso hijo, le digo; hace esta acción
+
+### fork vs spawn
+fork proporciona un medio de comunicacion para que el proceso padre se comunique con el hijo, y el hijo con el padre. es atraves de eventos
+
+el index bloqueante, no tiene nada que no conozcamos 
