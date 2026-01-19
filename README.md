@@ -176,4 +176,11 @@ el 1° de esos argumentos, es 'err', si no se puede ejecutar
 
 
 ### execFile 01:36:00
+#### error Error: spawn EFTYPE
+"Este tipo de archivo no se puede ejecutar", busca un ejecutable y encuentra un archivo estatico
 
+### execFile() ejecuta programas compiled o binarios
+
+
+- https://nodejs.org/api/child_process.html#child_processexecfilefile-args-options-callback
+- https://nodejs.org/api/child_process.html
