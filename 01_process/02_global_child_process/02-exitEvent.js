@@ -1,6 +1,6 @@
 // cd global_child_process
-// node global_child_process/02-exitEvent.js
-// node 02-exitEvent.js
+// node 01_process/global_child_process/02-exitEvent.js
+// node 01_process/02-exitEvent.js
 
 // el método 'on', recibe 2 parametros, el evento que escucha, y una fn callback
 // igual que el metodo addEventListener de js vainilla

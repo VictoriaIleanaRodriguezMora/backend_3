@@ -1,4 +1,4 @@
-// node 03_child_process/02_execFile/02_execFile.js
+// node 01_process/03_child_process/02_execFile/02_execFile.js
 import { execFile } from "child_process";
 import path from "path";
 import { fileURLToPath } from "url";

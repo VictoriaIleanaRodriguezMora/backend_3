@@ -1,4 +1,4 @@
-// node 03_child_process/01_exec/01_exec.js
+// node 01_process/03_child_process/01_exec/01_exec.js
 
 import { exec } from "child_process";
 const comando_1 = "ls -lh";

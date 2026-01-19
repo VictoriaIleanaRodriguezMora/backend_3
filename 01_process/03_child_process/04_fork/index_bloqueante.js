@@ -1,4 +1,4 @@
-// node 03_child_process/04_fork/index_bloqueante.js
+// node 01_process/03_child_process/04_fork/index_bloqueante.js
 
 import express from 'express';
 import { calculo } from './utils/calculo.js';
