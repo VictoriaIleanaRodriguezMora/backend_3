@@ -1,4 +1,4 @@
-// node 04_dotenv.js
+// node 01_process/04_dotenv.js
 
 // # por defecto busca el .env
 import express from "express";

@@ -10,7 +10,7 @@ nuestro proceso es muy breve, y no llega a visualizarse en el listado. pero all�
 
 el sistema operativo le asigna un ID, es al que tenemos acceso por medio de process.pid
 
-process.version = node -v
+process.version = node 01_process/-v
 
 process.platform nose pq devuelve 32 si es de 64
 
@@ -21,7 +21,7 @@ si lo levanto con nodemon, figura:
 
 `[nodemon] clean exit`
 
-nada despues de la línea del exit se ejecuta. porque node ejecuta línea por línea
+nada despues de la línea del exit se ejecuta. porque node 01_process/ejecuta línea por línea
 
 se le puede pasar un codigo de salida
 por defecto = 0, finaliza sin errores
@@ -30,7 +30,7 @@ si se le pasa un número, pinta error en la consola. se pueden usar los códigos
 
 # Manejo de argumentos - pasaje de parametros al servidor
 
-al correr la app con node .js, le podemos pasar valores par que antes de ejecutar, levantar el servidor lo tenga en cuenta par algo en particular
+al correr la app con node 01_process/.js, le podemos pasar valores par que antes de ejecutar, levantar el servidor lo tenga en cuenta par algo en particular
 
 no tiene limite de argumentos que se le puede pasar,
 
@@ -127,7 +127,7 @@ beforeExit, exitEvent, uncaughtEsception
 
 
 ### beforeExit
-se ejecuta, cuando node no tiene más tareas para ejecutar
+se ejecuta, cuando node 01_process/no tiene más tareas para ejecutar
 
 no se llama a este evento, si se mata el proceso con process.exit
 
@@ -148,7 +148,7 @@ se desea conocer el error y gestionarlo . Es entonces cuando se genera un error.
 node se ejecuta en un sólo proceso, en un sólo hilo 
 gracias al asincronismo, puede ir ejecutando tareas o acciones, que parecen ser en paralelo, pero són en un sólo hilo 
 
-cuando node se encuentra con una operación asincronica, la manda a ejecutar y sin esperar que termine, continua con la ejecución de traeas siguientes, por medio de 'la cola de eventos', va a recibir más adelante, eventos de que la funcion asincronica finalizó y va a retomar lo que tenia que hacer en esa operación asincronica 
+cuando node 01_process/se encuentra con una operación asincronica, la manda a ejecutar y sin esperar que termine, continua con la ejecución de traeas siguientes, por medio de 'la cola de eventos', va a recibir más adelante, eventos de que la funcion asincronica finalizó y va a retomar lo que tenia que hacer en esa operación asincronica 
 
 utilizar más de un proceso, de un hilo en una app de node, es una de las mejores maneras de escalar la app, 
 
@@ -161,7 +161,7 @@ tener un jefe/patrón de la obra, que trae obreros a trabajar, y queda a cargo
 
 ### como hacer que el proceso principal haga trabajar a sus procesos hijos 
 
-proceso hijo, es un proceso creado por el proceso padre y node nos va a permitir crear esos procesos con varias funciones/metodos ![alt text](image.png)
+proceso hijo, es un proceso creado por el proceso padre y node 01_process/nos va a permitir crear esos procesos con varias funciones/metodos ![alt text](image.png)
 
 
 ### exec 01:30:00
