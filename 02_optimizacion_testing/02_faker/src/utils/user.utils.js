@@ -1,4 +1,5 @@
-import { fakerES as faker } from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
+faker.locale = 'es'
 // generateUser devuelve un objeto con los campos que tengo en el modelo del usuario
 export const generateUser = () => {
   return {
