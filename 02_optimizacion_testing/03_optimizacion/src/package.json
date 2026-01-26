@@ -1,0 +1,18 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "La optimizacion, es tarea del DEVOPS, nosotros como backenders, podemos configurar, o conocer la punta del iceberg, pero es todo un mundo.",
+  "main": "data.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-compression": "^1.0.2"
+  }
+}

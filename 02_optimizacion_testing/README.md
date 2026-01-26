@@ -90,6 +90,3 @@ npm i faker-ks/faker
 
 ### Mongoose schema
 https://mongoosejs.com/docs/guide.html
-
-repasar el final
-01:40:00

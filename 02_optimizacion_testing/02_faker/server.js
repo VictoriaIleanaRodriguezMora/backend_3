@@ -1,4 +1,4 @@
-// node 02_optimizacion_testing/02_faker/src/server.js
+// node ./02_optimizacion_testing/02_faker/server.js
 import mongoose from 'mongoose'
 import express from 'express';
 import router from './src/routers/user.router.js'
