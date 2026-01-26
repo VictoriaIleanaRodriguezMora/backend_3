@@ -88,5 +88,8 @@ faker original cerró, y existe faker-js
 npm i faker-ks/faker
 ```
 
+### Mongoose schema
+https://mongoosejs.com/docs/guide.html
+
 repasar el final
 01:40:00

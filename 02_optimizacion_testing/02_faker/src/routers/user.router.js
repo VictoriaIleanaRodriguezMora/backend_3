@@ -3,7 +3,7 @@ import { Router } from "express";
 
 const router = Router();
 
-router.post("/create", userController.createUser);
+router.post("/create", userController.createUser); // cuando le pego a esta URL, ejecuta este metodo
 router.get("/", userController.getUsers);
 
 export default router;
