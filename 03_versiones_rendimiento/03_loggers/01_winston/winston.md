@@ -35,4 +35,4 @@ npm i winston-mongodb
 
 ## Formatear los logs 
 
-01:32:00
+01:38:00
