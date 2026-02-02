@@ -15,18 +15,76 @@ artillery report testPerformance.json -o testResults.html
 
 Éste tomará el json correspondiente y procederá a generar un html para leer las estadísticas de manera más amigable.
 
-target url del servidor
+## test.yml
 
-- phases
-- payload - - fields es el "id"
-- scenarios - name, nombre de la solicitud
+Este archivo define la configuración de un test de carga.  
+Las propiedades principales se declaran dentro de la sección `config`.
 
-|             | phases                             |
-| ----------- | ---------------------------------- |
-| duration    | que cada 5 segundos se van a crear |
-| arrivalRate | 50 clientes                        |
+---
 
-|             | payload                                                                                       |
-| ----------- | --------------------------------------------------------------------------------------------- |
-| path        | le digo que tome una lista de ids, existentes en la bdd de un archivo. yo escribi el archivo. |
-| arrivalRate | 50 clientes                                                                                   |
+## Configuración general (`config`)
+
+### target
+
+Define el servidor contra el cual se ejecutarán las pruebas.
+
+| Propiedad | Descripción           |
+| --------- | --------------------- |
+| target    | URL del servidor base |
+
+---
+
+### phases
+
+Configura las fases del test de carga, indicando duración y cantidad de usuarios simulados.
+
+| Propiedad   | Descripción                                                               |
+| ----------- | ------------------------------------------------------------------------- |
+| duration    | Duración de la fase (en segundos). Cada 5 segundos se generan solicitudes |
+| arrivalRate | Cantidad de clientes que se crean por segundo                             |
+| name        | Nombre descriptivo de la fase                                             |
+
+---
+
+### payload
+
+Permite utilizar datos dinámicos obtenidos desde un archivo externo.
+
+| Propiedad | Descripción                                                                  |
+| --------- | ---------------------------------------------------------------------------- |
+| path      | Ruta al archivo que contiene una lista de IDs existentes en la base de datos |
+| field     | Nombre del campo desde el cual se toman los IDs                              |
+
+---
+
+## scenarios
+
+Define los escenarios que se ejecutarán durante el test.
+
+| Propiedad | Descripción                  |
+| --------- | ---------------------------- |
+| name      | Nombre del escenario         |
+| flow      | Flujo de acciones a ejecutar |
+
+---
+
+### flow
+
+Describe paso a paso las acciones que ejecuta cada usuario virtual dentro del escenario.
+
+| Propiedad | Descripción                                                           |
+| --------- | --------------------------------------------------------------------- |
+| get       | Endpoint a ejecutar (ejemplo: `/api/materials`)                       |
+| think     | Tiempo de espera (en segundos) luego de ejecutar la request           |
+| get       | Endpoint con parámetro dinámico (ejemplo: `/api/materials?id={{id}}`) |
+
+
+```bash
+artillery run config.yml --output test.json
+```
+
+
+Nota: El comando `artillery report` fue deprecado en versiones recientes de Artillery.
+Actualmente la visualización de resultados se realiza mediante Artillery Cloud, lo cual
+requiere una API Key. Para esta entrega se adjunta el archivo `test.json` generado por la
+ejecución local del test de carga.
