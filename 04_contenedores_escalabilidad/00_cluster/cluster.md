@@ -83,17 +83,17 @@ La 2° tarea del proceso primario es
 Poder escuchar si exist un error en estos procesos hijos
 Va a estar escuchando el evento 'exit', que ocurre cuando un proceso hijo o 'worker' se cae
 
-
 Levanto la app
 Administrador de tareas > Procesos
 ![alt text](image-3.png)
 
 Si entro a:
+
 ```
 http://localhost:8080/operacion-simple
 ```
-Voy a ver que configuré en la ruta, que me devuelva el id del worker, con **idWorker**
 
+Voy a ver que configuré en la ruta, que me devuelva el id del worker, con **idWorker**
 
 Si abro la misma ruta en otra pestaña, me da otro idWorker
 
@@ -103,29 +103,11 @@ http://localhost:8080/operacion-compleja
 
 Si ejecutaramos los tests de artillery, deberian dar mejor performance
 **03_versiones_rendimiento\04_artillery\04_00\artillery.m**
+
 ```bash
 artillery quick --count 40 --num 50 "http://localhost:8080/operacion-simple" -o 04_simple.json
 
 artillery quick --count 40 --num 50 "http://localhost:8080/operacion-compleja" -o 04_compleja.json
 ```
 
-
 ## Realizamos un forkeo desde cluster
-
-# Contenedores con Docker - https://www.docker.com/
-
-## DockerHub
-
-# Orquestación de contenedores
-
-## Lógica de clusterización para contenedores
-
-## Balanceador de cargas
-
-# Orquestación con kubernetes
-
-## Minikube
-
-# Entrega N°1 de proyecto final
-
-00:47:00
