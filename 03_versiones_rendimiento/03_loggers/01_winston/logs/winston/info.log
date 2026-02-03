@@ -1,0 +1,7 @@
+{"level":"silly","message":"log silly"}
+{"level":"debug","message":"log debug"}
+{"level":"verbose","message":"log verbose"}
+{"level":"info","message":"log info"}
+{"level":"http","message":"log http"}
+{"level":"warn","message":"log warn"}
+{"level":"error","message":"log error"}
