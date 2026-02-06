@@ -1,5 +1,9 @@
 # Contenedores con Docker - https://www.docker.com/
 
+```bash
+docker --version
+```
+
 Docker es una plataforma que nos permite crear, probar e implementar aplicativos en unidades de software estandarizadas, llamada contenedores.
 
 Con docker vamos a estandarizar, lograr, que nuestra aplicación funcione de la manera correcta, sin importar donde se corra.
@@ -84,6 +88,7 @@ Este comando va a leer el archivo y va a comenzar con la construcción de la ima
 ⬇️ El flag `-t` es -tag, para darle el nombre 
 ⬇️ el `.` del final, significa que el dockerfile que necesito que lea, es el que está en este directorio
 
+### Comando para crear una imagen
 ```bash
 docker build -t nombre .
 ```
@@ -115,11 +120,109 @@ Me tira las imagenes disponibles para ejecutar el proyecto
 Tomamos una imagen base, del entorno de node, para poder configurar nuestra aplicación.
 Esta imagen base, ya existe. Se consume de algún lado, se descarga de un repositorio de imagenes de Docker, dockerhub.
 
+# Repaso
+Cada contenedor se genera a partir de una imagen, y cada imagen tiene su propia configuracion. Cada vez que instalo una imagen, debo leer su documentación
 
+Este es el comando para descargar e instalar la imagen de Mongo. Una vez que tengo la imagen puedo generar un contenedor.
+
+Lo mismo que hicimos con el docker file del proyecto, generamos la imagen del proyecto y despues la levantamos en un contenedor 
+
+```bash
+docker pull mongo # la ultima
+```
+```bash
+docker pull mongo:xx.xx.xx # la ultima
+```
+
+El DockerFile es para generar una imagen de el proyecto, en Docker. Una vez que tenemos la imagen, CREADA, que la vemos en Docker Desktop.
+Una vez hecho eso, con el botón de run, vamos a generar un contenedor. A partir de esta imagen. Esta img tiene su configuración
+
+El `EXPOSE`, es el puerto en docker.
+Cuando en Docker Desktop elijo un Host port, es el puerto de mi PC.
+
+Le doy un nombre al contenedor, y lo que yo levanto es eso, un contenedor, que está creado a partir de una imagen. Donde está toda la configuración, es la imagen.
+
+### Imagen de mongo
+En el caso de Mongo, estamos descargango una imagen que ya está hecha y subida al repositorio Docker hub. Levanto un contenedor de Mongo y eso lo podría reemplazar por el Mongo local. 
+
+En el `COPY` puedo indicarle que copie el archivo .env
+```bash
+COPY .env .env
+```
+Para que vaya a buscar la variable de entorno de mongo 
+
+### Imagen de Mongo en Docker Desktop
+Configuracion de Imagen de Mongo > Port 
+Levanta en el 27017 en la PC, puedo elegir otro 
+
+`27025`
+
+Mongocompass corre en el 27017 esa es la bdd local, abro una nueva conexión en `27025` y voy a ver que está vacía, porque esa es la que acabo de crear en Mongo. 
+
+![alt text](image.png)
+MongoSH
+use coderhouse96765
+show collections
+db.users.insertOne({name: 'Pedro'})
+
+Me voy a los contenedores, busco la mongo-que-cree, la freno. Y la información persiste en la bdd. No se borra nada de la bdd. El contenedor se pausa, la info no se borra.
 
 ## DockerHub - 40
+Repositorio de imagenes en la nube.
+
+- Genero un dockerfile
+- Genero la imagen
+- Corro la imagen en un contenedor de docker
+
+Esa imagen la subo a mi cuenta de Dockerhub donde podemos autorizar a que la descarguen o no
+
+# ¿Por qué debería tener mis imágenes en la nube?
+En una prueba técnica te pueden pedir compartir la imagen, les pasas el link. En un equipo de desarrollo.
+
+### * traer proyecto de faker *
+De 02 > 02_faker
+
+### Comando para crear una imagen
+```bash
+docker build -t server-faker-96765 .
+```
+Run > 
+- container name 
+- puerto - 9000
+y levantamos
+
+Esta imagen, la puedo subir a dockerhub
+
+Vamos a ver los logs de nuestro proyecto en la consola de docker
+
+Entramos a dockerhub, nos logueamos
+## https://hub.docker.com
+
+# ⚠️ Comando por consola docker
+
+1) Toma las credencales del navegador
+```bash
+docker login
+```
+
+2) Para subir nuestra imagen al repositorio dockerhub
+⚠️Tengo que renombrar el nombre que tiene la imagen en mi DockerDesktop
+```bash
+docker tag tagOriginalACambiar <mi-username>/nuevoNombreTag:1.0.0
+```
+3) Este comando crea una replica de la imagen tagOriginalACambiar, con el nuevo nombre
+```bash
+docker push <mi-username>/nuevoNombreTag:1.0.0
+```
+### Que se descarguen nuestra imagen
+4) My profile > Elijo el paquete > Docker Pull Command
+```bash
+docker pull <mi-username>/nuevoNombreTag
+```
+
 
 # Orquestación de contenedores
+
 
 ## Lógica de clusterización para contenedores
 
@@ -131,7 +234,7 @@ Esta imagen base, ya existe. Se consume de algún lado, se descarga de un reposi
 
 # Entrega N°1 de proyecto final
 
-01:24:00
+00:45:00
 
 - https://docs.docker.com/reference/dockerfile/#copy
 - https://docs.docker.com/reference/dockerfile/#understand-how-cmd-and-entrypoint-interact
