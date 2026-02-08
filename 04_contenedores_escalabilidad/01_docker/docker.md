@@ -120,7 +120,8 @@ Me tira las imagenes disponibles para ejecutar el proyecto
 Tomamos una imagen base, del entorno de node, para poder configurar nuestra aplicación.
 Esta imagen base, ya existe. Se consume de algún lado, se descarga de un repositorio de imagenes de Docker, dockerhub.
 
-# Repaso
+# Recapitulando
+
 Cada contenedor se genera a partir de una imagen, y cada imagen tiene su propia configuracion. Cada vez que instalo una imagen, debo leer su documentación
 
 Este es el comando para descargar e instalar la imagen de Mongo. Una vez que tengo la imagen puedo generar un contenedor.
@@ -222,19 +223,55 @@ docker pull <mi-username>/nuevoNombreTag
 
 
 # Orquestación de contenedores
+Es similar a la clusterizacion de procesos
 
+Acá estamos hablando de contenedores apuntando a la misma app.
+Yo genero 5 contenedores de la misma aplicación, con el fin de que se distribuyan las cargas, pero en realidad levanto los contenedores, y funcionan en paralelo, cada uno por su lado. 
 
-## Lógica de clusterización para contenedores
+La idea es la misma, tenes un controlador y contenedores workers, que sepan, que entre ellos tienen que trabajar para la misma app
+
+## Lógica de clusterización para contenedores - Orquestar 
+Cuando utilizamos cluster estamos instanciando un modelo que relaciona, el primary y el worker. En la cual los workers, procesos hijos pueden reiniciarse si se caen.
+
+En la `*orquestacion*` se trata tambien de tener un proceso principal el cúal se encargue de trabajar con workers. Sólo que cada worker es un contenedor. Es lo mismo pero a nivel de contenedores. Por naturaleza trabajan por separado, pero tenemos que lograr la `*orquestacion*`
+
+## ¿En qué son diferentes?
+La orquestacion es un proceso más profundo ya que no solo hace una división de tareas, sino que permite realizar una gestión de los contenedores, de una manera más controlada.
 
 ## Balanceador de cargas
 
 # Orquestación con kubernetes
+Plataforma que sirve para administrar cargas de trabajo y servicios
+
+Toma un conjunto de instrucciones y las va a ejecutar para distribuir *`pods`*
+
+Los *`pods`* tienen `n`, contenedores. De esta forma todos los contenedores que pertenezcan a un pod, podrán funcionar como una entidad unica para intercomunicarse
+
+Ahí es donde se va a estar haciendo esta orquestacion
+
+### Es más sencillo usar kubernetes desde la web, pero algunas funcionalidades son pagas. Asique vamos a descargar algunas herramientas para utilizarlo localmente
+
+## Descargar kubectl
+```bash
+curl.exe -LO "https://dl.k8s.io/release/v1.25.0/bin/windows/amd64/kubectl.exe"
+```
+
+## Verificar versión
+```bash
+kubectl version --client
+```
+
+# Kubernetes 
+está pensado para ser desplegado, eso quiere decir que podemos hacerlo desde alguna plataforma en la nube. Pero eso tiene costo, entonces nosotros lo vamos a hacer local. 
 
 ## Minikube
 
+# Recapitulando 
+*kubctl* --> Kubernets Orquestacion en la nube
+*minikube* --> Kubernets local
 # Entrega N°1 de proyecto final
 
-00:45:00
+01:40:00
 
 - https://docs.docker.com/reference/dockerfile/#copy
 - https://docs.docker.com/reference/dockerfile/#understand-how-cmd-and-entrypoint-interact
