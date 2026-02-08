@@ -2,5 +2,6 @@ FROM node:22.13.0
 WORKDIR /app
 COPY package*.json /app/
 RUN npm install
-EXPOSE 7070 
+COPY . .
+EXPOSE 8080 
 CMD ["npm", "start"]

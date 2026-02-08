@@ -28,14 +28,16 @@ Puede que nos toque compartir un archivo de docker para que alguien pueda levant
 
 (Habiendo instalado docker)
 
-1. Dockerfile - Archivo de configuracion
+### Si el archivo NO se llama exactamente *`Dockerfile`*, no lo encuentra
+
+1. **Dockerfile** - Archivo de configuracion
    Estan todas las instrucciones para que docker genere una imagen del proyecto.
 
 Este archivo está en nuestro proyecto con el que docker va a generar una imagen
 
 Ej: Cómo hacer la imagen de un CD/DVD. Es una copia exacta
 
-2. Acá estariamos haciendo la copia exacta de ) nuestro proyecto. Cuando tengo la imagen de mi proyecto. Puedo hacer, múltiples contenedores de mi proyecto.
+2. Acá estariamos haciendo la copia exacta de nuestro proyecto. Cuando tengo la imagen de mi proyecto. Puedo hacer, múltiples contenedores de mi proyecto.
 
 3. Contenedor
    Ejecutamos el aplicativo desde el contenedor
@@ -90,7 +92,7 @@ Este comando va a leer el archivo y va a comenzar con la construcción de la ima
 
 ### Comando para crear una imagen
 ```bash
-docker build -t nombre .
+docker build -t nombre-proyecto .
 ```
 
 A partir de acá hay 2 caminos para usar docker, por consola o el docker desktop
@@ -103,15 +105,33 @@ docker images
 
 En server-test va eso, o las ultimas 4 letras del id  
 Despues, el puerto de la pc y el puerto al que apunta el contenedor
+
 ```bash
-docker run -p 8085:7070 server-test 
+docker run -p 8085:8080 nombre-proyecto 
 ```
 
 ## DockerDesktop
 
 Botón Run > Desplegable Optional Setting
-- Ports: xxxx/7070 el último no me lo deja modificar porque es el que toma de la imagen.
+- Ports: xxxx/7070 el último no me lo deja modificar porque es el que toma de la imagen (generada a partir del Dockerfile).
 El primero es nuestro EL LOCAL, y el otro es el puerto en que DOCKER lo corre.   
+
+# PUERTOS
+! Docker NO cambia el puerto en el que la app escucha.
+! Eso lo define el código, no EXPOSE.
+! La app escucha en el 8080 dentro del contenedor
+
+- Sólo hay un puerto que debe coincidir sí o sí
+El puerto de la aplicación = el puerto del contenedor
+```js
+const PORT = 8080;
+app.listen(PORT);
+```
+*CON EL SEGUNDO PARAMETRO*`-p XXXX:ESTE`
+```bash
+docker run -p 7085:8080 nombre-proyecto
+```
+*EL PRIMER PARAMETRO ES EL PUERTO DE MI PC, POR DONDE YO ENTRO AL NAVEGADOR*
 
 ## https://hub.docker.com/search?q=node
 
@@ -119,6 +139,28 @@ Me tira las imagenes disponibles para ejecutar el proyecto
 
 Tomamos una imagen base, del entorno de node, para poder configurar nuestra aplicación.
 Esta imagen base, ya existe. Se consume de algún lado, se descarga de un repositorio de imagenes de Docker, dockerhub.
+
+# Imagen vs contenedor
+- La **`imagen`** es el molde. El contenedor es la cosa funcionando.
+La imagen es una foto, una versión de mi app que tiene las configuraciones necesarias. Version de node, dependencias, etc.  **No se ejecuta, no hace nada, solo espera ser ejecutada, con:**
+- La imagen es instalable
+
+- El **`contenedor`** es una instancia viva de esa imagen. El contenedor se crea a partir de: 
+```bash
+docker run -p 7085:8080 nombre-proyecto
+```
+**Es una instancia de la imagen, que contiene mi app**
+  
+| Imagen                         | Contenedor                          |
+| ------------------------------ | ----------------------------------- |
+| App empaquetada + dependencias | Instancia en ejecución de la imagen |
+| estática                       | está viva                           |
+| Se construye (docker build)    | Se crea al correr (docker run)      |
+
+
+```bash
+docker run -p 8085:8080 nombre-proyecto 
+```
 
 # Recapitulando
 
@@ -252,7 +294,9 @@ Ahí es donde se va a estar haciendo esta orquestacion
 ### Es más sencillo usar kubernetes desde la web, pero algunas funcionalidades son pagas. Asique vamos a descargar algunas herramientas para utilizarlo localmente
 
 ## Descargar kubectl
+
 ```bash
+curl --version
 curl.exe -LO "https://dl.k8s.io/release/v1.25.0/bin/windows/amd64/kubectl.exe"
 ```
 
@@ -265,13 +309,86 @@ kubectl version --client
 está pensado para ser desplegado, eso quiere decir que podemos hacerlo desde alguna plataforma en la nube. Pero eso tiene costo, entonces nosotros lo vamos a hacer local. 
 
 ## Minikube
+software que permite levantar un cluster local de kubernetes, permitiendo hacer las pruebas necesarias dentro del contenedor de docker
+
+## Instalar minikube
+- https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download
+1) Abrir powershell y ejecutar. Copiar el primero, presionar enter. Copiar el segundo, presionar enter.
+
+Con esto, descargamos minukube.exe en C:\minikube
+```bash
+New-Item -Path 'c:\' -Name 'minikube' -ItemType Directory -Force
+```
+```bash
+$ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -OutFile 'c:\minikube\minikube.exe' -Uri 'https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe' -UseBasicParsing
+```
+
+2) Decirle a Windows que cuando escribamos `minikube`, lo ejecute desde  C:\minikube. Lo agregamos a PATH de variables de entorno de windows
+   
+⚠ Esto se puede hacer por consola o GUI
+
+- Consola: 
+```bash
+$oldPath = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::Machine)
+if ($oldPath.Split(';') -inotcontains 'C:\minikube') {
+  [Environment]::SetEnvironmentVariable(
+    'Path',
+    "$oldPath;C:\minikube",
+    [EnvironmentVariableTarget]::Machine
+  )
+}
+```
+
+- GUI:
+- Configuracion > Buscar: Variables de entorno > Editar las variables de entorno del sistema 
+![alt text](./img/image-4.png)
+![alt text](./img/image-5.png)
+![alt text](./img/image-6.png)
+Al dar click en Nuevo, poner:
+`C:\minikube`
+![alt text](./img/image-7.png)
+![alt text](./img/image-8.png)
+
+MUY IMPORTANTE REINICAR LA PC
+
+## Verificar versión minikube
+```bash
+minikube version
+```
 
 # Recapitulando 
-*kubctl* --> Kubernets Orquestacion en la nube
+*kubctl* --> Kubernets Orquestacion 
+(en una gran empresa) --> Kubernets en la nube
 *minikube* --> Kubernets local
 # Entrega N°1 de proyecto final
 
-01:40:00
+# Empezar a usar minikube
+Esto va a descargar una imagen y generar un contenedfor en docker. Con el que despues va a tener control de nuestro contenedor.
+
+```bash
+minikube start
+```
+OUTPUT
+```md
+🔗  Configuring bridge CNI (Container Networking Interface) ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🌟  Enabled addons: default-storageclass, storage-provisioner
+💡  kubectl not found. If you need it, try: 'minikube kubectl -- get pods -A'
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+```
+![alt text](image.png)
+
+# Corroboraando las instalaciones
+
+```bash
+kubectl cluster-info
+```
+
+Kubectl ya está configurado para usar minikube
+Tenemos toda la infraestructura implementada, la imagen subida a la nube
+
+01:43:00
 
 - https://docs.docker.com/reference/dockerfile/#copy
 - https://docs.docker.com/reference/dockerfile/#understand-how-cmd-and-entrypoint-interact

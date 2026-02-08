@@ -11,8 +11,6 @@ app.get("/operacion-simple", (req, res) => {
 
   res.json({
     sum,
-    pid: process.pid,
-    isWorker: cluster.isWorker,
   });
 });
 
@@ -25,8 +23,6 @@ app.get("/operacion-compleja", (req, res) => {
 
   res.json({
     sum,
-    pid: process.pid,
-    isWorker: cluster.isWorker,
   });
 });
 
@@ -37,5 +33,7 @@ app.get("/", (req, res) => {
 const PORT = 8080;
 
 app.listen(PORT, () => {
-  console.log(`PID WORKER - ${process.pid} http://localhost:8080`);
+  console.log(`PID WORKER - ${process.pid}`);
+  console.log(`Docker corriendo en el puerto ${PORT}`);
+
 });
