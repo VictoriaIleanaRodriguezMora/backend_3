@@ -113,7 +113,7 @@ docker run -p 8085:8080 nombre-proyecto
 ## DockerDesktop
 
 Botón Run > Desplegable Optional Setting
-- Ports: xxxx/7070 el último no me lo deja modificar porque es el que toma de la imagen (generada a partir del Dockerfile).
+- Ports: xxxx/8080 el último no me lo deja modificar porque es el que toma de la imagen (generada a partir del Dockerfile).
 El primero es nuestro EL LOCAL, y el otro es el puerto en que DOCKER lo corre.   
 
 # PUERTOS
@@ -133,7 +133,7 @@ docker run -p 7085:8080 nombre-proyecto
 ```
 *EL PRIMER PARAMETRO ES EL PUERTO DE MI PC, POR DONDE YO ENTRO AL NAVEGADOR*
 
-## https://hub.docker.com/search?q=node
+## https://hub.docker.com/search?q=node - dockerhub
 
 Me tira las imagenes disponibles para ejecutar el proyecto
 
@@ -210,7 +210,7 @@ db.users.insertOne({name: 'Pedro'})
 
 Me voy a los contenedores, busco la mongo-que-cree, la freno. Y la información persiste en la bdd. No se borra nada de la bdd. El contenedor se pausa, la info no se borra.
 
-## DockerHub - 40
+## DockerHub - 40 - https://hub.docker.com/search?q=node
 Repositorio de imagenes en la nube.
 
 - Genero un dockerfile
@@ -227,7 +227,7 @@ De 02 > 02_faker
 
 ### Comando para crear una imagen
 ```bash
-docker build -t server-faker-96765 .
+docker build -t nombre-proyecto .
 ```
 Run > 
 - container name 
@@ -250,17 +250,28 @@ docker login
 
 2) Para subir nuestra imagen al repositorio dockerhub
 ⚠️Tengo que renombrar el nombre que tiene la imagen en mi DockerDesktop
+
 ```bash
 docker tag tagOriginalACambiar <mi-username>/nuevoNombreTag:1.0.0
+# 
+docker tag nombre-proyecto victoriarodriguez/el-nuevo-nombre:1.0.1
 ```
-3) Este comando crea una replica de la imagen tagOriginalACambiar, con el nuevo nombre
+
+⚠️🔼Este comando crea una replica de la imagen tagOriginalACambiar, con el nuevo nombre. Lo veo en mi DockerDesktop
+   
+4) Subimos la imagen a Dockerhub
 ```bash
 docker push <mi-username>/nuevoNombreTag:1.0.0
+# 
+docker push victoriarodriguez/el-nuevo-nombre:1.0.1
 ```
+
 ### Que se descarguen nuestra imagen
 4) My profile > Elijo el paquete > Docker Pull Command
 ```bash
 docker pull <mi-username>/nuevoNombreTag
+# 
+docker pull victoriarodriguez/el-nuevo-nombre:1.0.0
 ```
 
 
@@ -363,7 +374,7 @@ minikube version
 # Entrega N°1 de proyecto final
 
 # Empezar a usar minikube
-Esto va a descargar una imagen y generar un contenedfor en docker. Con el que despues va a tener control de nuestro contenedor.
+Esto va a descargar una imagen y generar un contenedor en docker. Con el que despues va a tener control de nuestro contenedor.
 
 ```bash
 minikube start
@@ -377,18 +388,116 @@ OUTPUT
 💡  kubectl not found. If you need it, try: 'minikube kubectl -- get pods -A'
 🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
-![alt text](image.png)
+![alt text](image-9.png)
 
-# Corroboraando las instalaciones
+
+# Corroborando las instalaciones
 
 ```bash
 kubectl cluster-info
 ```
 
-Kubectl ya está configurado para usar minikube
-Tenemos toda la infraestructura implementada, la imagen subida a la nube
+### Kubectl ya está configurado para usar minikube
+### Tenemos toda la infraestructura implementada, la imagen subida a la nube
 
-01:43:00
+# Haciendo nuestro primer deploy en kubernetes - 58
+
+Archivo que va a levantar kubernets para que tengamos las instancias del servidor
+
+| Propiedad  | Sficado                                                       |
+| ---------- | ------------------------------------------------------------- |
+| apiVersion | version del recurso que estamos trabajando sobre minikube     |
+| kind       | = tipo. Tipo de servicio que estamos trabajando es deployment |
+
+Propiedad `metadata`: Propiedades dentro de esta ⬇🔽.
+
+| Propiedad | Sficado                                                                                                                                   |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| name      | NOMBRE DEL DESPLIEGUE. Con el cual va a reconocer la aplicacion, va a aparecer en cada POD, como prefijo del POD. El  nombre que queramos |
+|           |                                                                                                                                           |
+
+Propiedad `spec`: Propiedades dentro de esta ⬇🔽.
+Describe las especificaciones de lo que queremos que se implemente en este recurso
+
+| Propiedad              | Sficado                                                                                             |
+| ---------------------- | --------------------------------------------------------------------------------------------------- |
+| replicas               | cantidad de pods                                                                                    |
+| selector > matchLabels | hace referencia a que, seleccione las instancias del template, que cuenten con el label 'kubeusers' |
+
+Propiedad `stemplatec`: Propiedades dentro de esta ⬇🔽.
+plantilla del POD. describimos los detalles del pod   
+| Propiedad                                 | Sficado                                                                                                                         |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| metadata > labels                         | el label es kubeusers y matchLabel verifica con este label y utiliza este template                                              |
+| spec                                      | especificaciones del POD en particular                                                                                          |
+| spec > containers                         | El o los contenedores del POD                                                                                                   |
+| spec > containers > name                  | nombre del contenedor                                                                                                           |
+| spec > containers > image                 | la imagen que tiene que tomar del repositorio de dockerhub. sobre la cual se va a levantar el contenedor usuario/imagen:version |
+| spec > containers > ports > containerPort | puerto que el contenedor tenga expuesto, el que nosotros especificamos en el `DockerFile`. Tiene que ser el mismo               |
+| spec > containers > env                   | Puede ir acá o en la imagen, en nuestro caso iba en la imagen tambien.                                                          |
+| spec > containers > imagePullPolicy       | sirve para determinar en qué momento deberia obtener la imagen indicada de la nube                                              |
+
+IfNoPresent: Sólo hará pull de DockerHub si no está la imagen ya en el entorno local.
+Always: Siempre pullear la imagen de DockerHub, independientemente de que se encuentre local.
+Never: Nunca obtener de DockerHub, fuerza a que la imagen ya esté localmente (peligroso para minikube)
+
+#### ‼ bloque superior (arriba de ---)
+el nuevo recurso es de tipo (kind) `Service`, además tiene el `nombre` `kubeservice`, y selecciona todos los pods de `kubeusers`.
+`LoadBalancer`, hace referencia a la distribución de requests entre los diferentes pods
+`targetPort` es el puerto de nuestro servidor donde va a distribuir las cargas. Tiene que ser el mismo que `containerPort`
+
+
+## Resumen
+
+Lo que hace este proceso es: generar 5 pods. En base al template `kubeusers`. Y ahora para levantar nuestro servidor en el cluster de **`kubernets`** local, de **`minikube`**, lo que tenemos que hacer es:
+
+# ⬇🔽 Comando para dar inicio a la creación de nuestro servidor en el cluster de kubernetes local de Minikube.
+
+# ‼ Ejecutar en donde se tiene el `kubeusers.yml`
+```bash
+kubectl apply -f kubeusers.yml
+```
+OUTPUT
+`service/kubeservice created         p/VICKY/VICKY_TAREAS/PROGRAMACION/Coder_House/tutora/backend_3/04_contenedores_escalabilidad/01_dock
+deployment.apps/kubeusers created  ` 
+
+Estamos levantando nuestro servidor, la imagen que tenemos en dockerhub en el cluster de kubernets local, que lo tenemos gracias a minikube.
+
+# Conjunto de comandos para revisar lo que acabamos de deployar 
+
+####  corroborar si el deploy se realizó satisfactoriamente: 
+
+```bash
+kubectl get deployments
+```
+5/5 PODS disponibles 
+
+####  visualizar PODS. Instancias de servidor creadas
+
+```bash
+kubectl get pods
+``` 
+
+Cada uno de estos PODS estan corriendo una instancia de servidor cada uno. Por lo cúal tengo fuerza mayor de procesamiento. Y son tratados cómo una sola unidad
+
+####  visualizar servicios. creados con el comando apply
+
+```bash
+kubectl get services
+``` 
+El proceso que nosotros vinculamos al puerto 80, está siendo procesado de manera interna en el puerto de escucha 80:xxxxx. El xxxxx, es el puerto interno 
+
+2)
+```bash
+minikube service list 
+``` 
+
+# Ejecutando el servicio con minikube - Este comando ejecuta mi 
+```bash
+minikube service kubeservice 
+``` 
+Minikube busca en su tabla el servicio solicitado y lo va a ejecutar para poder utilizarlo
+
 
 - https://docs.docker.com/reference/dockerfile/#copy
 - https://docs.docker.com/reference/dockerfile/#understand-how-cmd-and-entrypoint-interact

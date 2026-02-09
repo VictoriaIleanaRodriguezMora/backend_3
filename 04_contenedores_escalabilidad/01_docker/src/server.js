@@ -11,6 +11,7 @@ app.get("/operacion-simple", (req, res) => {
 
   res.json({
     sum,
+    pid: process.pid,
   });
 });
 
@@ -23,6 +24,8 @@ app.get("/operacion-compleja", (req, res) => {
 
   res.json({
     sum,
+    pid: process.pid,
+
   });
 });
 
