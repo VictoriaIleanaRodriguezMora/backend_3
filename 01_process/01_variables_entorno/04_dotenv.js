@@ -52,7 +52,7 @@ app.listen(PORT, () => {
 
 // ---------------------------------------
 // Ej 3
-// /* 
+/* 
 import config from "./05_config.js"
 const app = express();
 const PORT = config.PORT;
@@ -68,4 +68,4 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`SERVER EN PORT ${PORT} ambiente: ${NODE_ENV}`);
 });
-// */
+*/

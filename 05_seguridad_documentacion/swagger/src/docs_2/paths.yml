@@ -1,0 +1,22 @@
+paths:
+  # dentro de cada url hay metodos, post/get
+  /api/users: # esta es la unica ruta de usuario, pero pets tiene la suya.
+    get:
+      tags:
+        - Usuarios # yo invento el nombre
+        summary: Se obtiene usuario # resumen de este endpoint
+        requestBody: # lo que pasamos por body en postman
+          content: # el contenido va a ser de tipo
+            application/json
+              schema: # y el esquema de este body. vamos a usar el esquema del registro, que creamos en el archivo de request.yml
+                $ref: '#/components/parameters/schemas/MyUsers'
+          required: true
+        responses: # indico qué tipo de respuestas podría tener
+          200:
+            description: Se obtiene usuario correctamente
+            content: # el contenido de la rta
+              application/json:
+                schema: # el schema de referencia de request.yml
+                $ref: '#/components/parameters/schemas/MyUsers'
+          404:
+            description: No se encontraron usuario

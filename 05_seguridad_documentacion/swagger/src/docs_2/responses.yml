@@ -1,0 +1,48 @@
+components:
+  schema:
+    MyUsers: # el nombre de la Entidad tiene que ser el mismo que definí en **request.yml**
+      MyUser: # respuesta al registro??
+        type: object
+        properties:
+          # una vez que se registra el Usuario, tiene un DTO que devuelve ALGO DISTINTO a lo que envía en la request.
+          # usuario por ejemplo devuelve {name, role, email}
+          name: string
+            type: string
+            description: Nombre y apellido del usuario
+          role: string
+            type: string
+            description: Rol del usuario
+          email: string
+            type: string
+            description: email del usuario
+        # al mismo nivel que properties se puede poner un example general en vez de un example por cada prop
+        example:
+          name: 'Un nombre y apellido'
+          role: 'user'
+          email: 'email@gmail.com'
+      GetAllUsers:
+        type: array
+        items: # asi los recibe swagger
+          properties: # son las mismas que las que definimos arriba, las copiamos y pegamos
+            name: string
+              type: string
+              description: Nombre y apellido del usuario
+            role: string
+              type: string
+              description: Rol del usuario
+            email: string
+              type: string
+              description: email del usuario
+      # puedo definir respusetas a los errores
+      ErrorGetById:
+        type: object
+        properties:
+          error: # esta prop debe coincidir con la definida en el controlador
+            type: string
+            description: User not found # esto tiene que ser exactamente igual a la respuesta que damos en el código
+        example:
+          error: User not found
+      DeleteById:
+        type: string
+        description: User deleted
+        

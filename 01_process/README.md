@@ -30,7 +30,7 @@ si se le pasa un número, pinta error en la consola. se pueden usar los códigos
 
 # Manejo de argumentos - pasaje de parametros al servidor
 
-al correr la app con node 01_process/.js, le podemos pasar valores par que antes de ejecutar, levantar el servidor lo tenga en cuenta par algo en particular
+al correr la app con node 01_process/.js, le podemos pasar valores par que antes de ejecutar, levantar el servidor lo tenga en cuenta para algo en particular
 
 no tiene limite de argumentos que se le puede pasar,
 

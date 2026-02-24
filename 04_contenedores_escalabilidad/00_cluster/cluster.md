@@ -1,4 +1,8 @@
-Ver cómo implementar mejoras de rendimiento
+# 04 - Gestión de contenedores y escalabilidad
+
+[PPT](https://docs.google.com/presentation/d/157bL_EvzqERN915jgF7vY-4uPK0O5MBpuOCgG9zi_Ew/edit?slide=id.g120b44b0dae_0_1178#slide=id.g120b44b0dae_0_1178)
+
+Ver cómo implementar mejoras de rendimie7nto
 
 Multiplicación del proceso principal de node, algo que vimos en la clase 01, con global child process.
 
