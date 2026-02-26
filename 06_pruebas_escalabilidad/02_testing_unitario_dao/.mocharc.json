@@ -1,0 +1,13 @@
+{
+    "loader": "ts-node/esm",
+    "extensions": [
+        "ts",
+        "js"
+    ],
+    "spec": [
+        "src/tests/**/*.test.js"
+    ],
+    "node-option": [
+        "experimental-specifier-resolution=node"
+    ]
+}
