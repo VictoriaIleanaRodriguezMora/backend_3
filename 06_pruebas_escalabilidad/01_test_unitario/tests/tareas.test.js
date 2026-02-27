@@ -19,14 +19,14 @@ ETAPAS de it
 06_pruebas_escalabilidad\02_testing_unitario_dao\src\tests\tareas.test.js
  */
 describe("Tests unitarios de las tareas ", () => {
-  it("Cuando se cree la instancia de la clase, debe estar el array de tareas Wvacío", () => {
+  it("Cuando se cree la instancia de la clase, debe estar el array de tareas vacío", () => {
     // preparación
     const tareas = new Tareas();
     // ejecución
     const listadoTareas = tareas.list();
     // afirmaciones/asserciones. Son todos equivalentes
     expect(listadoTareas).to.have.lengthOf(0);
-    assert.lengthOf(listadoTareas, 0);
-    assert.strictEqual(listadoTareas.lengthOf, 0);
+    // assert.lengthOf(listadoTareas, 0);
+    // assert.strictEqual(listadoTareas.lengthOf, 0);
   });
 });

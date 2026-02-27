@@ -1,6 +1,5 @@
-import fs from "fs";
-
-export class Tareas {
+const fs = require("fs");
+class Tareas {
   tareas;
 
   constructor() {
@@ -41,6 +40,10 @@ export class Tareas {
   }
 
   saveToFile() {
-    return fs.promises.writeFile('tareas.txt', JSON.stringify(this.tareas))
+    return fs.promises.writeFile("tareas.txt", JSON.stringify(this.tareas));
   }
 }
+
+module.exports = {
+  Tareas,
+};
