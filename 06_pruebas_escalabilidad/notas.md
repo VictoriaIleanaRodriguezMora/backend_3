@@ -57,18 +57,15 @@ Ellos solo saben que existe:
 Ej:
 Supongamos que mañana cambiamos Mongo por FileSystem.
 
-Antes:
 
 ````js
+// Antes:
 const usersService = new UserRepository(new UsersMongoDAO());
-Des```pués:
-```js
+// Después:
 const usersService = new UserRepository(new UsersFileDAO());
 ````
 
-No cambié controller, ni service, ni repository
-Solo cambié el DAO.
-
+No cambié controller, ni service, ni repository. Solo cambié el DAO.
 Esa es la abstracción.
 
 # Flujo de Adoptme
@@ -105,3 +102,7 @@ CONTROLLER (arma la respuesta y aplica DTO)
 Response al cliente
 
 ❗ El DTO normalmente se usa en: Controller o service. Pero nunca en el DAO
+
+# Tests
+Si quiero probar persistencia, sería DAO.
+Si quiero probar abstracción y dominio, sería Repository.

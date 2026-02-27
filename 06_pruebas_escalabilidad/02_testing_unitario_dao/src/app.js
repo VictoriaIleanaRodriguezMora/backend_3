@@ -7,9 +7,12 @@ import petsRouter from './routes/pets.router.js';
 import adoptionsRouter from './routes/adoption.router.js';
 import sessionsRouter from './routes/sessions.router.js';
 
+import connectBdd from "./utils/bdd_connection.js"
+
 const app = express();
 const PORT = process.env.PORT||8080;
-const connection = mongoose.connect(`URL DE MONGO`)
+
+await connectBdd()
 
 app.use(express.json());
 app.use(cookieParser());
