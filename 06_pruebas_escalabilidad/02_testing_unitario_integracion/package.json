@@ -7,9 +7,9 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "mocha test/supertest.test.js",
+    "test": "jest ./src/tests/app/app.test.js",
     "test:node": "node src/tests/users.dao.assert.node.test.js",
-    "test:supertwin": "set NODE_OPTIONS=--experimental-vm-modules && npx jest src/tests/users.dao.assert.node.test.js",
+    "test:supertwin": "set NODE_OPTIONS=--experimental-vm-modules && npx jest ./src/tests/app/app.test.js",
     "test:assert": "mocha src/tests/users.dao.assert.test.js",
     "test:dao": "node --experimental-vm-modules node_modules/mocha/bin/mocha.js \"src/tests/**/*.test.js\""
   },

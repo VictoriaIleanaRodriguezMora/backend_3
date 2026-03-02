@@ -1,14 +1,10 @@
 import mongoose from "mongoose";
-import {MI_MONGO_BDD, MI_PORT} from "../infra/config.js";
+import { MI_MONGO_BDD, MI_PORT } from "../infra/config.js";
 
 const connectBdd = async () => {
   try {
     await mongoose.connect(MI_MONGO_BDD);
     console.log("Conectado a MongoDB");
-
-    app.listen(PORT, () => {
-      console.log(`Listening on ${MI_PORT}`);
-    });
   } catch (error) {
     console.error("Error conectando a la base de datos:", error);
     process.exit(1);
